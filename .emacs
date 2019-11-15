@@ -7,11 +7,10 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode 0))
 (menu-bar-mode 0)
-(tool-bar-mode 0)
-(scroll-bar-mode 0)
 (electric-pair-mode 1)
-(global-display-line-numbers-mode 1)
 
 (setq make-backup-files nil)
 
@@ -19,17 +18,32 @@
 	   :map emacs-lisp-mode-map
 	   ("C-c C-c" . eval-buffer))
 
+(use-package scroll-bar
+  :defer t
+  :config
+  (scroll-bar-mode 0))
+
+(use-package display-line-numbers
+  :defer t
+  :config
+  (global-display-line-numbers-mode 1))
+
+(use-package linum
+  :if (not (boundp 'display-line-numbers))
+  :defer t
+  :config
+  (global-linum-mode 1))
+
 (use-package paren
   :defer t
-  :init
-  (show-paren-mode 1)
   :config
-  (setq show-paren-style 'expression))
+  (show-paren-mode 1)
+  (setq show-paren-style 'mixed))
 
 (use-package winner
   :defer t
   :bind (("C-z" . winner-undo))
-  :init
+  :config
   (winner-mode 1))
 
 (use-package skk
@@ -40,9 +54,8 @@
 (use-package ivy
   :ensure t
   :defer t
-  :init
-  (ivy-mode 1)
   :config
+  (ivy-mode 1)
   (setq ivy-use-virtual-buffers t
 	enable-recursive-minibuffers t))
 
