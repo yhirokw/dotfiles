@@ -38,3 +38,11 @@ setopt prompt_subst
 precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
 prompt=$'\n[%~]$vcs_info_msg_0_%# '
+
+autoload -U select-word-style
+select-word-style default
+zstyle ':zle:*' word-chars '  /-'
+zstyle ':zle:*' word-style unspecified
+
+type kubectl > /dev/null && . <(kubectl completion zsh)
+type oc > /dev/null && . <(oc completion zsh)
