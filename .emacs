@@ -13,6 +13,9 @@
 (electric-pair-mode 1)
 
 (setq make-backup-files nil)
+(setq viper-mode nil)
+
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 (bind-keys ("C-h" . delete-backward-char)
 	   :map emacs-lisp-mode-map
@@ -81,3 +84,7 @@
   :defer t
   :config
   (setq twittering-icon-mode t))
+
+(use-package yaml-mode
+  :ensure t
+  :defer t)

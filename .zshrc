@@ -41,7 +41,7 @@ prompt=$'\n[%~]$vcs_info_msg_0_%# '
 
 autoload -U select-word-style
 select-word-style default
-zstyle ':zle:*' word-chars '  /-'
+zstyle ':zle:*' word-chars ' ./-'
 zstyle ':zle:*' word-style unspecified
 
 type kubectl > /dev/null && . <(kubectl completion zsh)
